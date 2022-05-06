@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Complete Bootstrap 4 Website Layout</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+	<link href="style.css" rel="stylesheet">
+</head>
+<body onload="startGame()">
+
+<!-- Navigation -->
+ <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+ <div class="container-fluid">
+ 	<a class="navbar-brand" href="#"><img class="img-fluid pl-4" src="image/logo.png"></a>
+ 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+ 		<span class="navbar-toggler-icon"></span>
+ 	</button>
+ 	<div class="collapse navbar-collapse" id="navbarResponsive">
+ 		<ul class="navbar-nav ml-auto">
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="index.html">HOME</a>
+ 			</li>
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="resume.html">RESUME</a>
+ 			</li>
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+ 			</li>
+ 			<li class="nav-item ">
+ 				<a class="nav-link active" href="javascript.html">JAVASCRIPT</a>
+ 			</li>
+ 			<li class="nav-item">
+ 				<a class="nav-link" href="contact.html">CONTACT</a>
+ 			</li>
+
+ 		</ul>
+ 		
+ 	</div>
+
+ </div>
+ 	
+ </nav>
+ 				<div class="container-fluid">
+				    <div class="row">
+				        <div class="col-md-12 ">
+				            <div class="imgtxt">
+				               <h1 class="display-2">JavaScript</h1>
+				               <h5>JavaScript Flappy Bird Game</h5>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+		<main>
+				<div class="container-fluid padding">
+					
+					<div class="row ">
+						<div class="col-md-12 text-center">
+			   				<div id="game" ></div>
+   			   				<div class="game-controls desktop" >
+               					<button class="btn btn-primary" class="myButton" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">FLAP WINGS</button>
+               					<button class="btn btn-warning" class="myButton"><a href="javascript:location.reload(true)">New Game</a></button>
+               				</div>
+               				<div class="game-controls mobile">
+								<button class="btn btn-primary" class="myButton" ontouchstart= "accelerate(-0.2)" ontouchend="accelerate(0.05)">FLAP WINGS</button>
+								<a href="" ><button class="btn btn-primary" class="myButton">PLAY AGAIN</button></a>
+							</div>
+
+           	   			</div>
+           	   		</div>
+               </div>
+
+               <!-- This is the JavaScript for the game-->
+
+		   <script>
+		      var myGamePiece;
+		      var myObstacles = [];
+		      var myScore;
+		      var myMusic
+		      var d=1;
+		      var s="12px";
+		      var space=1 ;
+			  if (window.innerWidth < 768){
+			  	space=2;}
+
+		      
+		      function startGame() {
+ 				  
+		          myGamePiece = new component(45/space, 45/space, "image/bird.png", 10, 120,"image");
+		          myBackground = new component(640*1.5, 360*1.5 ,"image/bg.png",0,0,"image");
+		          myGamePiece.gravity = 0.05;
+		          myScore = new component("30px", "Consolas", "white", 20, 40, "text");
+		          myMusic = new sound("sound/music.mp3");
+		          
+		          
+		          myGameArea.start();
+		        
+		      }
+		      
+		      var myGameArea = {
+		          canvas : document.createElement("canvas"),
+		          start : function() {
+		          	if (window.innerWidth < 768){
+							canvasWidth = 300;
+							canvasHeight= 300;
+							 d=3.2;
+							 s="120px";
+							 space=4;
+						}
+						else{
+
+		              this.canvas.width = 640*1.5;
+		              this.canvas.height = 360*1.5;}
+		              this.context = this.canvas.getContext("2d");
+		              var myGame = document.getElementById("game");
+		              myGame.insertBefore(this.canvas, myGame.childNodes[0]);        
+		              this.frameNo = 0;
+		              this.interval = setInterval(updateGameArea, 15);
+		           },
+		          clear : function() {
+		              this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		          }
+		      }
+
+		      
+		      
+		      function component(width, height, color, x, y, type) {
+		      		
+		          this.type = type;
+    			 if (type == "image") {
+			      this.image = new Image();			            
+			      this.image.src = color;}
+		          this.score = 0;
+		          this.width = width;
+		          this.height = height;
+		          this.speedX = 0;
+		          this.speedY = 0;    
+		          this.x = x;
+		          this.y = y;
+		          this.gravity = 0;
+		          this.gravitySpeed = 0;
+		          this.update = function() {
+		              ctx = myGameArea.context;
+		              if (this.type == "text") {
+				            ctx.font = this.width + " " + this.height;
+				            ctx.fillStyle = color;
+				            ctx.fillText(this.text, this.x, this.y);
+				        } 
+
+		              if (type == "image" ) {
+           				 ctx.drawImage(this.image, 
+                		 this.x, 
+                		 this.y,
+                		 this.width, this.height);
+                		
+		              }	 
+
+		              else {
+		                  ctx.fillStyle = color;
+		                  ctx.fillRect(this.x, this.y, this.width, this.height);
+		              }
+		          }
+
+		       
+		          
+		          this.newPos = function() {
+		              this.gravitySpeed += this.gravity;
+		              this.x += this.speedX;
+		              this.y += this.speedY + this.gravitySpeed;
+		              if (this.type == "background") {
+           				 if (this.x == -(this.width)) {
+               				 this.x = 0;
+            			 }
+        				}	
+		              this.hitBottom();
+		          }
+		          this.hitBottom = function() {
+		              var rockbottom = myGameArea.canvas.height - this.height;
+		              if (this.y > rockbottom) {
+		                  this.y = rockbottom;
+		                  this.gravitySpeed = 0;
+		              }
+		           }
+		          this.crashWith = function(otherobj) {
+		              var myleft = this.x;
+		              var myright = this.x + (this.width);
+		              var mytop = this.y;
+		              var mybottom = this.y + (this.height);
+		              var otherleft = otherobj.x;
+		              var otherright = otherobj.x + (otherobj.width);
+		              var othertop = otherobj.y;
+		              var otherbottom = otherobj.y + (otherobj.height);
+		              var crash = true;
+		              if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+		                  crash = false;
+		              }
+		              return crash;
+		          }
+		      }
+		      
+		      function updateGameArea() {
+
+		          var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+		          for (i = 0; i < myObstacles.length; i += 1) {		      
+		              if (myGamePiece.crashWith(myObstacles[i])) {             	  
+		                  myMusic.stop();
+		                  return;
+		              }
+
+		          }
+		          myMusic.play();
+		          myGameArea.clear();
+		          myGameArea.frameNo += 1;
+		          if (myGameArea.frameNo == 1 || everyinterval(250/space)) {
+		              x = myGameArea.canvas.width;
+		              minHeight = 0;
+		              maxHeight = 300/d;
+		              height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+		              minGap = 75;
+		              maxGap = 200/d;
+		              gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+		              myObstacles.push(new component(50/d, height, "image/Obstaclesdown.png", x, 0 ,"image"));
+		              myObstacles.push(new component(50/d, x - height - gap, "image/Obstacles_up.png", x, height + gap,"image"));
+		          }
+		          myBackground.newPos();
+		          myBackground.update();
+		          for (i = 0; i < myObstacles.length; i += 1) {
+		              myObstacles[i].x += -1;
+		              myObstacles[i].update();
+		          }
+
+		          myScore.text="SCORE: " + myGameArea.frameNo;
+		          myScore.update();		       
+		          myGamePiece.newPos();
+		          myGamePiece.update();
+		      }
+		      function sound(src) {
+				    this.sound = document.createElement("audio");
+				    this.sound.src = src;
+				    this.sound.setAttribute("preload", "auto");
+				    this.sound.setAttribute("controls", "none");
+				    this.sound.style.display = "none";
+				    document.body.appendChild(this.sound);
+				    this.play = function(){
+				        this.sound.play();
+				    }
+				    this.stop = function(){
+				        this.sound.pause();
+				    }    
+				}
+		      function everyinterval(n) {
+		          if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+		          return false;
+		      }
+		      
+		      function accelerate(n) {
+		          myGamePiece.gravity = n;
+		          
+		      }
+		      
+
+
+
+		   </script>
+
+		</main>
+		<footer>
+	
+<div class="container-fluid padding">
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-3 text-center">
+		<hr class="light">
+		<img src="image/footerlogo.png">
+		<hr class="light">
+		<p><a href="https://saintpaul.edu" target="_blank">Saint Paul College</a></p>
+			<p><a href="mailto:me@gmail.com" target="_blank">Email me</a> </p>
+			<p><a href="tel:9999999999">Call Me</a></p>
+			<p><a href="sms:9999999999">Text Me</a></p>
+			</p>
+	</div>
+	<div class="col-md-4 text-center ">
+		<hr class="light-full">
+		<h4 class="text-center">Sample Portfolio Website for<br> Web Development Students</h4>
+		<hr class="light-full">
+		<p>This website is a sample portfolio<br> website made for students at <b>Saint Paul College</b>.<br> It features a mythical<br> student named <em>Haweten Kebebew.</em></p>
+	</div>
+	
+	<div class="col-md-3 text-center" >
+		<hr class="light">
+		<h4 class="text-center">CONNENCT</h4>
+		<hr class="light">
+		<a href="https://www.facebook.com"><i class="fab fa-facebook"></i><br>FACEBOOK</a><br>
+		<a href="https://twitter.com"><i class="fab fa-twitter"></i><br>TWITTER</a><br>
+		<a href="https://www.instagram.com/?hl=en"><i class="fab fa-instagram"></i><br>INSTAGRAM</a><br>		
+	</div>
+	<div class="col-md-1"></div>
+</div>
+	 <div class="col-md-12 text-center bg-dark"> 
+	 	<hr class="light-full">
+	 	<small>&copy; Haweten Mekonnen</small>
+	 </div>
+</div>
+
+
+</footer>
+
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</body>
+</html>
