@@ -128,7 +128,7 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 
 }
 .carousel-caption h1{
-  font-size: 600%;
+  font-size: 400%;
   text-transform: uppercase;
   text-shadow:1px 1px 12px #000000 ;
 }
@@ -145,7 +145,7 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 .imgtxt {
 
   background: linear-gradient(to left, #642b73, #c6426e); 
-    top: 50%;
+    top: 150%;
     transform: translateY(-50);
     height: 300px;
     text-align: center;
@@ -159,9 +159,6 @@ box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px
 .imgtxt:hover{
 height: 400px;
 padding-top: 150px;
-}
-.imgtxt h1{
-
 }
 
 
@@ -260,21 +257,39 @@ iframe{
   height: 400px;
   width: 100%;
 }
-
-
-@media (max-width: 768px) {
-  h1{
-    font-size: 1.5em;
-  }
- .carousel-caption h1{
+@media (max-width: 1024px) {
+.imgtxt h1{
+font-size: 3em;
+}
+.imgtxt h5{
+font-size: 1.5em;
+}
+.carousel-caption h1{
   font-size: 100%;
   text-transform: uppercase;
   text-shadow:1px 1px 12px #000000 ;
 }
 .carousel-caption{
   position: absolute;
-  top: 5%;
- /* transform: translateY(-50);*/
+  top: 20%;
+ transform: translateY(-50);
+}
+}
+@media (max-width: 768px) {
+ 
+.imgtxt {
+display: none;
+}
+
+ .carousel-caption h1{
+  font-size: 200%;
+  text-transform: uppercase;
+  text-shadow:1px 1px 12px #000000 ;
+}
+.carousel-caption{
+  position: absolute;
+  top: 20%;
+ transform: translateY(-50);
 }
 }
 
@@ -294,6 +309,9 @@ iframe{
     display: block;
     touch-action: manipulation;
   }
+  .mob-con{
+    display: none;
+}
 }
 
 

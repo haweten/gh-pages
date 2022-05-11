@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Complete Bootstrap 4 Website Layout</title>
+	<meta name="description" content="This is the javascript page of my portfolio">
+	<title>Haweten Mekonnen portfolio::JAVASCRIPT</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -12,7 +13,6 @@
 </head>
 <body onload="startGame()">
 
-<!-- Navigation -->
  <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
  <div class="container-fluid">
  	<a class="navbar-brand" href="#"><img class="img-fluid pl-4" src="image/logo.png"></a>
@@ -21,21 +21,18 @@
  	</button>
  	<div class="collapse navbar-collapse" id="navbarResponsive">
  		<ul class="navbar-nav ml-auto">
- 			<li class="nav-item">
- 				<a class="nav-link" href="index.html">HOME</a>
- 			</li>
- 			<li class="nav-item">
- 				<a class="nav-link" href="resume.html">RESUME</a>
- 			</li>
- 			<li class="nav-item">
- 				<a class="nav-link" href="portfolio.html">PORTFOLIO</a>
- 			</li>
  			<li class="nav-item ">
- 				<a class="nav-link active" href="javascript.html">JAVASCRIPT</a>
- 			</li>
- 			<li class="nav-item">
- 				<a class="nav-link" href="contact.html">CONTACT</a>
- 			</li>
+	 				<a class="nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i>HOME</a>
+	 			</li>
+	 			<li class="nav-item ">
+	 				<a class="nav-link " href="resume.html"><i class="fa fa-sticky-note" aria-hidden="true"></i>RESUME</a>
+	 			</li>
+	 			<li class="nav-item">
+	 				<a class="nav-link" href="portfolio.html"><i class="fa fa-briefcase" aria-hidden="true"></i>PORTFOLIO</a>
+	 			</li>
+	 			<li class="nav-item">
+	 				<a class="nav-link active" href="javascript.html"><i class="fa fa-gamepad" aria-hidden="true"></i>JAVASCRIPT</a>
+	 			</li>
 
  		</ul>
  		
@@ -44,36 +41,34 @@
  </div>
  	
  </nav>
- 				<div class="container-fluid">
-				    <div class="row">
-				        <div class="col-md-12 ">
-				            <div class="imgtxt">
-				               <h1 class="display-2">JavaScript</h1>
-				               <h5>JavaScript Flappy Bird Game</h5>
-				            </div>
-				        </div>
-				    </div>
+ 	<div class="container-fluid">
+	    <div class="row">
+	        <div class="col-md-12  ">
+	            <div class="imgtxt">
+		            <h1 class="display-2">JavaScript</h1>
+		            <h5>JavaScript Flappy Bird Game</h5>
+		        </div>
+		    </div>
+		</div>
+	</div>
+<main>
+	<div class="container-fluid padding">				
+		<div class="row ">
+			<div class="col-md-12 text-center">
+				<div id="game" ></div>
+   	   				<div class="game-controls desktop" >
+       					<button class="btn btn-primary" class="myButton" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">FLAP WINGS</button>
+       					<button class="btn btn-warning" class="myButton"><a href="javascript:location.reload(true)">New Game</a></button>
+       				</div>
+     				<div class="game-controls mobile">
+						<button class="btn btn-primary" class="myButton" ontouchstart= "accelerate(-0.2)" ontouchend="accelerate(0.05)">FLAP WINGS</button>
+						<a href="" ><button class="btn btn-primary" class="myButton">PLAY AGAIN</button></a>
+					</div>
 				</div>
-		<main>
-				<div class="container-fluid padding">
-					
-					<div class="row ">
-						<div class="col-md-12 text-center">
-			   				<div id="game" ></div>
-   			   				<div class="game-controls desktop" >
-               					<button class="btn btn-primary" class="myButton" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">FLAP WINGS</button>
-               					<button class="btn btn-warning" class="myButton"><a href="javascript:location.reload(true)">New Game</a></button>
-               				</div>
-               				<div class="game-controls mobile">
-								<button class="btn btn-primary" class="myButton" ontouchstart= "accelerate(-0.2)" ontouchend="accelerate(0.05)">FLAP WINGS</button>
-								<a href="" ><button class="btn btn-primary" class="myButton">PLAY AGAIN</button></a>
-							</div>
-
-           	   			</div>
-           	   		</div>
-               </div>
-
-               <!-- This is the JavaScript for the game-->
+       	   	</div>
+       	</div>
+    </div>
+<!-- This is the JavaScript for the game-->
 
 		   <script>
 		      var myGamePiece;
@@ -92,7 +87,7 @@
 		          myGamePiece = new component(45/space, 45/space, "image/bird.png", 10, 120,"image");
 		          myBackground = new component(640*1.5, 360*1.5 ,"image/bg.png",0,0,"image");
 		          myGamePiece.gravity = 0.05;
-		          myScore = new component("30px", "Consolas", "white", 20, 40, "text");
+		          myScore = new component("30px", "Consolas", "red", 20, 40, "text");
 		          myMusic = new sound("sound/music.mp3");
 		          
 		          
@@ -106,6 +101,7 @@
 		          	if (window.innerWidth < 768){
 							canvasWidth = 300;
 							canvasHeight= 300;
+							myScore = new component("10px", "Consolas", "blue", 10, 20, "text"); 
 							 d=3.2;
 							 s="120px";
 							 space=4;
@@ -257,7 +253,7 @@
 		      }
 		      
 		      function accelerate(n) {
-		          myGamePiece.gravity = n;
+		          myGamePiece.gravity = n/d;
 		          
 		      }
 		      
@@ -266,44 +262,46 @@
 
 		   </script>
 
-		</main>
-		<footer>
+</main>
+<footer>
 	
-<div class="container-fluid padding">
-<div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-3 text-center">
-		<hr class="light">
-		<img src="image/footerlogo.png">
-		<hr class="light">
-		<p><a href="https://saintpaul.edu" target="_blank">Saint Paul College</a></p>
-			<p><a href="mailto:me@gmail.com" target="_blank">Email me</a> </p>
-			<p><a href="tel:9999999999">Call Me</a></p>
-			<p><a href="sms:9999999999">Text Me</a></p>
-			</p>
-	</div>
-	<div class="col-md-4 text-center ">
-		<hr class="light-full">
-		<h4 class="text-center">Sample Portfolio Website for<br> Web Development Students</h4>
-		<hr class="light-full">
-		<p>This website is a sample portfolio<br> website made for students at <b>Saint Paul College</b>.<br> It features a mythical<br> student named <em>Haweten Kebebew.</em></p>
-	</div>
+	<div class="container-fluid padding">
+		<div class="row">
+			<div class="col-md-1">				
+			</div>
+			<div class="col-md-3 text-center">
+				<hr class="light">
+				<img src="image/footerlogo.png">
+				<hr class="light">
+				<p><a href="https://saintpaul.edu" target="_blank">Saint Paul College</a></p>
+				<p><a href="mailto:me@gmail.com" target="_blank">Email me</a> </p>
+				<p><a href="tel:9999999999">Call Me</a></p>
+				<p><a href="sms:9999999999">Text Me</a></p>
+			
+			</div>
+			<div class="col-md-4 text-center ">
+				<hr class="light-full">
+				<h4 class="text-center">Sample Portfolio Website for<br> Web Development Students</h4>
+				<hr class="light-full">
+				<p>This website is a sample portfolio<br> website made for students at <b>Saint Paul College</b>.<br> It features a mythical<br> student named <em>Haweten Kebebew.</em></p>
+			</div>
 	
-	<div class="col-md-3 text-center" >
-		<hr class="light">
-		<h4 class="text-center">CONNENCT</h4>
-		<hr class="light">
-		<a href="https://www.facebook.com"><i class="fab fa-facebook"></i><br>FACEBOOK</a><br>
-		<a href="https://twitter.com"><i class="fab fa-twitter"></i><br>TWITTER</a><br>
-		<a href="https://www.instagram.com/?hl=en"><i class="fab fa-instagram"></i><br>INSTAGRAM</a><br>		
+			<div class="col-md-3 text-center" >
+				<hr class="light">
+				<h4 class="text-center">CONNENCT</h4>
+				<hr class="light">
+				<a href="https://www.facebook.com"><i class="fab fa-facebook"></i><br>FACEBOOK</a><br>
+				<a href="https://twitter.com"><i class="fab fa-twitter"></i><br>TWITTER</a><br>
+				<a href="https://www.instagram.com/?hl=en"><i class="fab fa-instagram"></i><br>INSTAGRAM</a><br>		
+			</div>
+			<div class="col-md-1"></div>
+		
+		<div class="col-md-12 text-center bg-dark"> 
+			 	<hr class="light-full">
+			 	<small>&copy; Haweten Mekonnen</small>
+			 </div>
+		</div>
 	</div>
-	<div class="col-md-1"></div>
-</div>
-	 <div class="col-md-12 text-center bg-dark"> 
-	 	<hr class="light-full">
-	 	<small>&copy; Haweten Mekonnen</small>
-	 </div>
-</div>
 
 
 </footer>
